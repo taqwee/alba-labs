@@ -78,3 +78,26 @@
     .hero-moon { right: -14vmin; opacity: 0.7; }
   }
 }
+::-webkit-scrollbar {
+  width: 6px; /* Makes the scrollbar very thin */
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Hides the bulky white track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333; /* Dark gray to match your UI */
+  border-radius: 10px; /* Cool rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #99e135; /* Your Alba Labs green color on hover! */
+}
+
+/* Firefox compatibility */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #333333 transparent;
+}

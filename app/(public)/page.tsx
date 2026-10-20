@@ -131,13 +131,51 @@ export default async function HomePage() {
         </section>
       )}
 
-      <section className="mx-auto max-w-page px-4 sm:px-6">
-        <div className="rounded-2xl bg-accent px-6 py-14 text-center text-accent-fg sm:px-12">
-          <h2 className="text-3xl sm:text-4xl">Have something in mind?</h2>
-          <p className="mx-auto mt-3 max-w-lg">Send us a few lines about your project and we will reply with next steps.</p>
-          <Link href="/contact" className="btn mt-6 bg-primary px-6 py-3 text-primary-fg hover:bg-primary/90">Contact Alba Labs</Link>
-        </div>
-      </section>
+{/* --- Option 5 (Reversed & Bold): Dot Matrix Geometrics CTA --- */}
+<section className="mx-auto max-w-page px-4 sm:px-6 pb-24">
+  <div className="relative overflow-hidden rounded-[2rem] bg-[#a3e635] px-6 py-24 text-center mx-auto w-full shadow-[0_0_40px_rgba(163,230,53,0.15)] border border-[#a3e635]/50">
+    
+    {/* Black Dot Matrix Quarter-Circle (Top Left) */}
+    <div 
+      className="absolute top-0 left-0 w-64 h-64 opacity-50 pointer-events-none rounded-br-[100%]"
+      style={{
+        backgroundImage: 'radial-gradient(#171717 3px, transparent 3px)',
+        backgroundSize: '24px 24px'
+      }}
+    />
+
+    {/* Black Dot Matrix Triangle (Bottom Right) */}
+    <div 
+      className="absolute bottom-0 right-0 w-64 h-64 opacity-50 pointer-events-none"
+      style={{
+        backgroundImage: 'radial-gradient(#171717 3px, transparent 3px)',
+        backgroundSize: '24px 24px',
+        clipPath: 'polygon(100% 100%, 0% 100%, 100% 0%)' 
+      }}
+    />
+    
+    {/* Dark accent line at the top to anchor the design */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-1.5 bg-[#171717] rounded-b-md opacity-90" />
+
+    {/* Content */}
+    <div className="relative z-10 flex flex-col items-center">
+      <h2 className="text-4xl md:text-5xl font-display font-bold text-[#171717] tracking-tight">
+        Have something in mind?
+      </h2>
+      <p className="mx-auto mt-4 max-w-lg text-lg font-medium text-[#171717]/80">
+        Send us a few lines about your project and we will reply with next steps.
+      </p>
+      
+      {/* Dark button with neon text */}
+      <Link 
+        href="/contact" 
+        className="mt-10 inline-flex items-center justify-center rounded-full bg-[#171717] px-8 py-4 text-sm font-bold text-[#a3e635] transition-all hover:scale-105 hover:bg-[#262626] shadow-xl"
+      >
+        Contact Alba Labs
+      </Link>
+    </div>
+  </div>
+</section>
     </>
   );
 }

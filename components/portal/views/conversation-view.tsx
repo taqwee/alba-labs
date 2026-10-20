@@ -76,7 +76,8 @@ export async function ConversationView({ id, user, base }: { id: string; user: S
             <Badge tone="info">{humanize(conv.channel)}</Badge><StatusBadge value={conv.status} />
             {!isCustomer && <>
               <span>{conv.customers?.full_name}</span>
-              {wa && <span>+{wa.wa_id}{wa.is_mock && " (simulated)"}</span>}
+              {/* Phone number hidden - Replaced with generic label */}
+              {wa && <span>WhatsApp Client{wa.is_mock && " (simulated)"}</span>}
               <span>Assigned to: {nameOf(conv.assigned_to)}</span>
             </>}
           </p>

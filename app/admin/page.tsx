@@ -6,6 +6,7 @@ import { getWhatsAppMode } from "@/lib/whatsapp/config";
 import { Notice } from "@/components/ui/basics";
 import { formatDateTime, timeAgo } from "@/lib/utils";
 
+
 export default async function Page() {
   const user = await requireRole("ADMIN");
   const s = createServerSupabase();
@@ -65,3 +66,4 @@ export default async function Page() {
     </>
   );
 }
+

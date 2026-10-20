@@ -18,8 +18,10 @@ export async function ConversationList({ base, filter }: { base: string; filter?
   let q = supabase.from("conversations")
     .select("id, channel, status, subject, last_message_at, last_message_preview, assigned_to, customers(full_name), whatsapp_contacts(wa_id, is_mock)")
     .order("last_message_at", { ascending: false }).limit(100);
+    
   if (filter?.status && (CONVERSATION_STATUSES as string[]).includes(filter.status)) q = q.eq("status", filter.status);
   if (filter?.assigned === "none") q = q.is("assigned_to", null);
+  
   const { data } = await q;
   const rows = (data ?? []) as unknown as Row[];
 
@@ -48,8 +50,13 @@ export async function ConversationList({ base, filter }: { base: string; filter?
           <tbody>
             {rows.map((r) => (
               <tr key={r.id} className="border-b border-border last:border-0 hover:bg-primary/[0.03]">
-                <td className="td"><Link className="font-medium hover:text-secondary" href={`${base}/${r.id}`}>{r.customers?.full_name || "Unknown"}</Link>
-                  {r.whatsapp_contacts && <p className="text-xs text-muted">+{r.whatsapp_contacts.wa_id}{r.whatsapp_contacts.is_mock && " (simulated)"}</p>}</td>
+                <td className="td">
+                  <Link className="font-medium hover:text-secondary" href={`${base}/${r.id}`}>
+                    {r.customers?.full_name || "Unknown"}
+                  </Link>
+                  {/* Phone number hidden here - replaced with generic label */}
+                  {r.whatsapp_contacts && <p className="text-xs text-muted">WhatsApp Client {r.whatsapp_contacts.is_mock && " (simulated)"}</p>}
+                </td>
                 <td className="td"><Badge tone="info">{humanize(r.channel)}</Badge></td>
                 <td className="td"><StatusBadge value={r.status} /></td>
                 <td className="td text-muted">{r.assigned_to ? names.get(r.assigned_to) ?? "Staff" : "—"}</td>

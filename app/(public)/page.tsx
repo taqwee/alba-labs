@@ -5,6 +5,8 @@ import { MoonPhase } from "@/components/public/moon";
 import { ScrollMoon } from "./scroll-moon";
 import { SafeImage } from "@/components/public/safe-image";
 import { SITE_NAME } from "@/lib/env";
+import { createServerSupabase } from "@/lib/supabase/server";
+import { SignOutButton } from "@/components/sign-out-button";
 
 export const revalidate = 60;
 export const metadata = pageMetadata({
@@ -14,7 +16,16 @@ export const metadata = pageMetadata({
 });
 
 export default async function HomePage() {
-  const [settings, services, work] = await Promise.all([getSiteSettings(), getActiveServices(), getPublishedPortfolio()]);
+  const supabase = createServerSupabase();
+  
+  // We added supabase.auth.getUser() to check if someone is logged in right as the page loads
+  const [settings, services, work, { data: { user } }] = await Promise.all([
+    getSiteSettings(), 
+    getActiveServices(), 
+    getPublishedPortfolio(),
+    supabase.auth.getUser()
+  ]);
+  
   const { hero, about, process } = settings;
   const featured = work.slice(0, 3);
 
@@ -54,6 +65,19 @@ export default async function HomePage() {
               >
                 {hero.secondaryCta} <span aria-hidden="true" className="ml-1 opacity-70">→</span>
               </Link>
+
+              {/* Conditional Logged-In User Actions */}
+              {/* Conditional Logged-In User Actions */}
+              {user && (
+                <div className="flex items-center gap-4 sm:ml-4 sm:pl-4 sm:border-l border-border mt-4 sm:mt-0 w-full sm:w-auto">
+                  <Link 
+                    href="/dashboard" 
+                    className="text-sm font-semibold text-[#a3e635] hover:underline"
+                  >
+                    Go to Dashboard
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
 

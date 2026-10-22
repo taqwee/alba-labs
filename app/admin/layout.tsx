@@ -18,6 +18,10 @@ const ITEMS: NavItem[] = [
   { href: "/admin/files", label: "Files", group: "Content", permission: "customer.manage" },
   { href: "/admin/whatsapp", label: "WhatsApp", group: "Communication", permission: "whatsapp.manage" },
   { href: "/admin/staff", label: "Staff", group: "Management", permission: "staff.manage" },
+  
+  // ---> NEW QUOTATIONS LINK ADDED HERE <---
+  { href: "/admin/quotation", label: "Billing", group: "Management" },
+  
   { href: "/admin/notifications", label: "Notifications", group: "Management" },
   { href: "/admin/activity", label: "Activity log", group: "Management", permission: "audit.read" },
   { href: "/admin/settings", label: "Settings", group: "Settings", permission: "settings.manage" },

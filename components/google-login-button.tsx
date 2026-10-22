@@ -1,16 +1,31 @@
 "use client";
 
-import { createBrowserSupabase } from "@/lib/supabase/client"; // Adjust path if your client file is named differently
+import { createBrowserSupabase } from "@/lib/supabase/client"; 
 
 export function GoogleLoginButton() {
   const supabase = createBrowserSupabase();
 
   const handleGoogleLogin = async () => {
+    // Safely determines the live URL so it doesn't default to localhost
+    const getURL = () => {
+      let url =
+        process?.env?.NEXT_PUBLIC_SITE_URL ??
+        window.location.origin;
+      
+      // Ensure the URL is properly formatted
+      url = url.startsWith('http') ? url : `https://${url}`;
+      url = url.endsWith('/') ? url.slice(0, -1) : url;
+      return url;
+    };
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        // This matches your existing route and tells it to go to /admin after login
-        redirectTo: `${window.location.origin}/auth/callback?next=/`,
+        redirectTo: `${getURL()}/auth/callback?next=/`,
+        // This forces Google to show the account picker screen
+        queryParams: {
+          prompt: "select_account",
+        },
       },
     });
 

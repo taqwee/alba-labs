@@ -7,7 +7,7 @@ import { publicEnv, SITE_NAME } from "@/lib/env";
 export const metadata: Metadata = {
   metadataBase: new URL(publicEnv.siteUrl),
   title: { default: `${SITE_NAME} — creative and digital agency`, template: `%s | ${SITE_NAME}` },
-  description: "Lunomi Studio is a creative and digital agency for brand identity, design and digital services.",
+  description: "Alba Lab is a creative and digital agency for brand identity, design and digital services.",
   openGraph: { siteName: SITE_NAME, type: "website" },
 };
 export const viewport: Viewport = { themeColor: "#9e1b26", width: "device-width", initialScale: 1 };

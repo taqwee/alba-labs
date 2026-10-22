@@ -21,7 +21,7 @@ export function GoogleLoginButton() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${getURL()}/auth/callback?next=/`,
+        redirectTo: `${getURL()}/auth/callback`,
         // This forces Google to show the account picker screen
         queryParams: {
           prompt: "select_account",
